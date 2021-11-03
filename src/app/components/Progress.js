@@ -11,7 +11,7 @@ export default function Progress(props) {
         {text}
       </Text>
       <View style={styles.progContainer}>
-        <View style={[styles.progress, {width:percent+"%", backgroundColor:color}]}></View>
+        <View style={[styles.progress, {width:(percent < 100 ? percent : 100)+"%", backgroundColor:color}]}></View>
       </View>
     </View>
   )

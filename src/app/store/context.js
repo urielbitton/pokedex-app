@@ -11,6 +11,7 @@ const StoreContextProvider = (props) => {
 
   const [allPokemon, setAllPokemon] = useState([])
   const [activeNav, setActiveNav] = useState('')
+  const [pokeLimit, setPokeLimit] = useState(15)
   
   const menuLinks = [
     {title: 'Pokedex', color: Colors.aqua},
@@ -29,15 +30,15 @@ const StoreContextProvider = (props) => {
   useEffect(() => {
     axios({
       method: 'get', 
-      url: `https://pokeapi.co/api/v2/pokemon?limit=150`,
+      url: `https://pokeapi.co/api/v2/pokemon?limit=${pokeLimit}`,
     }).then((res) => {
       setAllPokemon(res.data.results)
     })
-  },[])
+  },[pokeLimit])
  
   return (
     <StoreContext.Provider value={{
-      allPokemon, setAllPokemon, menuLinks, newsStories, activeNav, setActiveNav
+      allPokemon, setAllPokemon, menuLinks, newsStories, activeNav, setActiveNav, pokeLimit, setPokeLimit
     }}>
       {props.children}
     </StoreContext.Provider>

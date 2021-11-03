@@ -11,9 +11,10 @@ import { useNavigation } from '@react-navigation/native'
 export default function PokeCard(props) {
 
   const {name, url} = props.poke
-  const {index, pageTitle} = props
+  const {pageTitle} = props
   const [pokemon, setPokemon] = useState({})
   const navigation = useNavigation() 
+  const artwork = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`
 
   const pokeTypes = pokemon.types?.map((ty,i) => {
     return <TypeBubble name={ty.type.name} key={i} />
@@ -40,7 +41,7 @@ export default function PokeCard(props) {
           {pokeTypes}
         </View>
         <View style={styles.imgContainer}>
-          <Image source={{uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.order}.png`}} style={styles.pokeImg}/>
+          <Image source={{uri: artwork}} style={styles.pokeImg}/>
           <Image source={pokeballImg} style={styles.pokeballImg}/>
         </View>
       </View> 

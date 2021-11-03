@@ -7,11 +7,9 @@ export const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight
   },  
   pokedexContainer: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between', 
-    flexDirection: 'row', 
-    flexWrap: "wrap",
-    padding: 20,
-    flex: 1
+    padding: 20
   }
 })

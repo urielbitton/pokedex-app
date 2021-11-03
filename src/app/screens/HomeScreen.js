@@ -8,13 +8,19 @@ import InfoCard from '../components/InfoCard'
 import { StoreContext } from '../store/context';
 import PageTitle from '../components/PageTitle';
 import SearchBar from 'react-native-elements/dist/searchbar/SearchBar-ios';
+import { useNavigation } from '@react-navigation/native'
 
 export default function HomeScreen() {
  
   const {menuLinks, newsStories} = useContext(StoreContext)
+  const navigation = useNavigation() 
 
   const cardsRender = menuLinks?.map((card) => {
-    return <InfoCard card={card} key={card.title} />
+    return <InfoCard 
+      card={card} 
+      key={card.title} 
+      onPress={() => navigation.navigate(card.title)}
+    />
   })
 
   const newsStoriesRender = newsStories?.map(news => {

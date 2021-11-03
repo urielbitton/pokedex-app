@@ -10,8 +10,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
-    marginHorizontal: 0,
-    marginVertical: 8,
+    marginHorizontal: 7,
+    marginVertical: 7,
     backgroundColor: Colors.color,
     flexBasis: '48%'
   },

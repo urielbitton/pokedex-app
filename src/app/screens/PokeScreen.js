@@ -23,7 +23,8 @@ export default function PokeScreen(props) {
   const navigation = useNavigation() 
   const zeroPad = (num, places) => String(num).padStart(places, '0')
   const pokeNum = zeroPad(pokemon.order, 3)
-  let rotateValueHolder = new Animated.Value(0)
+  const rotateValueHolder = new Animated.Value(0)
+  const artwork = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`
 
   const addToFavorite = () => {
     setFavorite(prev => !prev)
@@ -97,7 +98,7 @@ export default function PokeScreen(props) {
             <Text style={styles.number}>#{pokeNum}</Text>
           </View>
           <View style={styles.pokeImgsContainer}>
-            <Image source={{uri:`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.order}.png`}} style={styles.pokeImg}/>
+            <Image source={{uri:artwork}} style={styles.pokeImg}/>
             <View style={styles.pokeballContainer}>
               <Animated.Image
                 style={[styles.pokeballImg, {transform: [{rotate: rotateData}] }]}

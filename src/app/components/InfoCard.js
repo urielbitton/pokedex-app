@@ -1,15 +1,18 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { cardStyles } from '../styles/InfoCard';
 import pokeballImg from '../assets/imgs/pokeball-white.png'
-import { styles } from '../styles/HomeScreen';
 
 export default function Card(props) {
 
   const {title, color} = props.card
+  const {onPress} = props
   
   return (
-    <View style={[cardStyles.card, {backgroundColor:color, shadowColor: color}]}>
+    <TouchableOpacity 
+      style={[cardStyles.card, {backgroundColor:color, shadowColor: color}]}
+      onPress={() => onPress()}
+    >
       <View style={cardStyles.titleCont}>
         <Text style={cardStyles.title}>{title}</Text> 
       </View>
@@ -18,6 +21,6 @@ export default function Card(props) {
         style={cardStyles.pokeball} 
         source={pokeballImg}
       />
-    </View>
+    </TouchableOpacity>
   )
 }

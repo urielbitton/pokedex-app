@@ -12,37 +12,37 @@ export default function ScreenNav(props) {
 
   const {allPokemon} = useContext(StoreContext)
 
-    const Stack = createStackNavigator()
-    const navigRef = useRef() 
+  const Stack = createStackNavigator()
+  const navigRef = useRef() 
 
-    const pokeScreensRender = allPokemon?.map((poke,i) => {
-      return <Stack.Screen name={poke.name} key={i}>
-          {props => <PokeScreen poke={poke} key={poke.id}/>} 
-      </Stack.Screen>
-    }) 
+  const pokeScreensRender = allPokemon?.map((poke,i) => {
+    return <Stack.Screen name={poke.name} key={i}>
+        {props => <PokeScreen poke={poke} key={poke.id}/>} 
+    </Stack.Screen>
+  }) 
 
-    return ( 
-      <View style={styles.homecont}> 
-        <NavigationContainer ref={navigRef}>
-          <Stack.Navigator headerMode={false} initialRouteName="Home">  
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Pokedex" component={PokedexScreen} />
-              {
-                allPokemon.length ? pokeScreensRender : 
-                <Stack.Screen name="Loading">
-                  {props => <Text>Loading</Text>}
-                </Stack.Screen>
-              }
-          </Stack.Navigator>
-          <BottomNav navigRef={navigRef} />
-        </NavigationContainer>
-      </View> 
-    )
+  return ( 
+    <View style={styles.homecont}> 
+      <NavigationContainer ref={navigRef}>
+        <Stack.Navigator headerMode={false} initialRouteName="Home">  
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Pokedex" component={PokedexScreen} />
+            {
+              allPokemon.length ? pokeScreensRender : 
+              <Stack.Screen name="Loading">
+                {props => <Text>Loading</Text>}
+              </Stack.Screen>
+            }
+        </Stack.Navigator>
+        <BottomNav navigRef={navigRef} />
+      </NavigationContainer>
+    </View> 
+  )
 }
 
 const styles = StyleSheet.create({
-    homecont: {
-        flex: 1,
-        width: '100%'
-    }
+  homecont: {
+    flex: 1,
+    width: '100%'
+  }
 })

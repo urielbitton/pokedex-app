@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react'
-import { ScrollView, View, Text } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
+import { ScrollView, View, FlatList } from 'react-native'
 import PageTitle from '../components/PageTitle'
 import PokeCard from '../components/PokeCard'
 import Screen from '../components/Screen'
@@ -9,7 +9,8 @@ import {StoreContext} from '../store/context'
 
 export default function PokedexScreen() {
 
-  const {allPokemon} = useContext(StoreContext)
+  const {allPokemon, setPokeLimit} = useContext(StoreContext)
+  const [isRefresh, setIsRefresh] = useState(false)
 
   const pokedex = allPokemon?.map((poke,i) => {
     return <PokeCard poke={poke} key={poke.name} pageTitle={poke.name}/>
@@ -20,6 +21,10 @@ export default function PokedexScreen() {
   //     console.log(snap.data())
   //   })
   // },[])
+
+  useEffect(() => {
+    return() => setPokeLimit(15)
+  },[])
   
   return (
     <ScrollView>
@@ -28,9 +33,20 @@ export default function PokedexScreen() {
           <View style={styles.header}>
             <PageTitle title="Pokedex"/>
           </View>
-          <Text></Text>
-          <View style={styles.pokedexContainer}>
-            {pokedex}
+          <View>
+            <FlatList 
+              data={allPokemon}
+              keyExtractor={allPokemon => allPokemon.name}
+              renderItem={poke => 
+                <PokeCard poke={poke.item} pageTitle={poke.item.name}/>
+              }
+              contentContainerStyle={styles.pokedexContainer}
+              numColumns={2} 
+              // onEndReached={() => setPokeLimit(prev => prev + 15)}
+              onEndReachedThreshold={1}
+              onRefresh={() => setIsRefresh(true)}
+              refreshing={isRefresh}
+            />
           </View>
         </View>
       </Screen>
