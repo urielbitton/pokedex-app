@@ -8,6 +8,7 @@ import { StoreContext } from '../store/context';
 import PageTitle from '../components/PageTitle';
 import SearchBar from 'react-native-elements/dist/searchbar/SearchBar-ios';
 import { useNavigation } from '@react-navigation/native'
+import { db } from '../firebase/Fire';
 
 export default function HomeScreen() {
  
@@ -40,6 +41,12 @@ export default function HomeScreen() {
       </View>
     </TouchableWithoutFeedback>
   })
+
+  useEffect(() => {
+    db.collection('test').doc('test').onSnapshot(snap => {
+      console.log(snap.data())
+    })
+  },[])
 
   return (
     <ScrollView>
