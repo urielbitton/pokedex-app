@@ -12,6 +12,7 @@ const StoreContextProvider = (props) => {
   const [allPokemon, setAllPokemon] = useState([])
   const [activeNav, setActiveNav] = useState('')
   const [pokeLimit, setPokeLimit] = useState(25)
+  const [login, setLogin] = useState(false)
   
   const menuLinks = [
     {title: 'Pokedex', color: Colors.aqua},
@@ -38,7 +39,8 @@ const StoreContextProvider = (props) => {
  
   return (
     <StoreContext.Provider value={{
-      allPokemon, setAllPokemon, menuLinks, newsStories, activeNav, setActiveNav, pokeLimit, setPokeLimit
+      allPokemon, setAllPokemon, menuLinks, newsStories, activeNav, setActiveNav, 
+      pokeLimit, setPokeLimit, login, setLogin
     }}>
       {props.children}
     </StoreContext.Provider>

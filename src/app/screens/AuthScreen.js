@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, Text, ScrollView, Image } from 'react-native'
 import Screen from '../components/Screen'
 import { styles } from '../styles/AuthScreen'
 import authImg from '../assets/imgs/pokeAuth.png'
 import pokeLogo from '../assets/imgs/pokeLogo.png'
-import { Input, Button  } from 'react-native-elements';
+import { Input, Button, Chip  } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../utilities/Colors'
+import {StoreContext} from '../store/context'
 
 export default function AuthScreen() {
+
+  const {setLogin} = useContext(StoreContext)
+
   return (
     <ScrollView>
       <Screen showPokeImg>
@@ -47,6 +51,8 @@ export default function AuthScreen() {
               iconPosition="right"
               style={styles.loginBtn}
               containerStyle={{borderRadius: 40}}
+              titleStyle={{fontSize: 20}}
+              onPress={() => setLogin(true)}
               icon={
                 <Icon
                   name="arrow-right"

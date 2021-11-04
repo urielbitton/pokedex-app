@@ -16,10 +16,11 @@ export default function BottomNav(props) {
     {title:'Search',icon:'search1'},
     {title:'Favorites',icon:'hearto'} 
   ])  
-  const navlinksrow = navLinks?.map(link => {
+  const navlinksrow = navLinks?.map((link,i) => {
     return <TouchableOpacity 
       style={styles.navTab} 
       onPress={() => {navigRef.current.navigate(link.title);setUpdate(prev => prev+1)}}
+      key={i}
     >
       <AntDesign name={link.icon} size={24} color={activeNav===link.title?"#fff":"rgba(255,255,255,0.6)"} />
       <Text style={[styles.navLinkText, {color:activeNav===link.title?"#fff":"rgba(255,255,255,0.6)"}]}>{link.title}</Text>

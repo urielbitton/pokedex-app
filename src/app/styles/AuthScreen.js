@@ -7,6 +7,8 @@ export const styles = StyleSheet.create({
     flex: 1,
     height: '100%', 
     paddingTop: Constants.statusBarHeight,
+    paddingBottom: 30,
+    backgroundColor: 'rgba(200,200,200,0.22)'
   },
   authImgContainer: {
     width: '100%',
@@ -40,10 +42,10 @@ export const styles = StyleSheet.create({
     marginBottom: 30
   },
   inputContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#f9f9f9',
     borderBottomWidth: 0,
     padding: 10,
-    elevation: 4,
+    elevation: 3,
     paddingHorizontal: 20,
     borderRadius: 40,
     width: '100%'
@@ -65,7 +67,7 @@ export const styles = StyleSheet.create({
     marginTop: 30
   },
   loginBtn: {
-    paddingVertical: 20,
+    paddingVertical: 20
   },
   registerText: {
     marginTop: 20,

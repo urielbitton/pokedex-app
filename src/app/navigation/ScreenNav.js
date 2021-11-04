@@ -8,6 +8,8 @@ import PokeScreen from '../screens/PokeScreen'
 import HomeScreen from '../screens/HomeScreen'
 import PokedexScreen from '../screens/PokedexScreen'
 import AuthScreen from '../screens/AuthScreen'
+import SearchScreen from '../screens/SearchScreen'
+import FavoritesScreen from '../screens/FavoritesScreen'
 
 export default function ScreenNav(props) {
 
@@ -29,6 +31,8 @@ export default function ScreenNav(props) {
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Pokedex" component={PokedexScreen} />
           <Stack.Screen name="Auth" component={AuthScreen} />
+          <Stack.Screen name="Search" component={SearchScreen} />
+          <Stack.Screen name="Favorites" component={FavoritesScreen} />
             {
               allPokemon.length ? pokeScreensRender : 
               <Stack.Screen name="Loading">

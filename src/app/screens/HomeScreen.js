@@ -22,8 +22,12 @@ export default function HomeScreen() {
     />
   })
 
-  const newsStoriesRender = newsStories?.map(news => {
-    return <TouchableWithoutFeedback style={styles.newsStoryContainer} onPress={() => Linking.openURL(news.url)}>
+  const newsStoriesRender = newsStories?.map((news,i) => {
+    return <TouchableWithoutFeedback 
+      style={styles.newsStoryContainer} 
+      onPress={() => Linking.openURL(news.url)}
+      key={i}
+    >
       <View style={styles.newsStoryFlex}>
         <View style={styles.storyTextContainer}>
           <Text style={styles.storyTitle}>{news.title}</Text>
