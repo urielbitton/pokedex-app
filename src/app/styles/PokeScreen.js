@@ -130,7 +130,8 @@ export const styles = StyleSheet.create({
   sectionTitle: {
     fontSize:17,
     fontWeight:'700',
-    marginVertical:20
+    marginVertical:20,
+    flexBasis: '100%'
   }, 
   columnLabel: {
     fontWeight: '700',
@@ -142,6 +143,50 @@ export const styles = StyleSheet.create({
   },
   abilityText: {
     marginRight: 5,
+    textTransform: 'capitalize'
+  },
+  evolutionRow: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    width: '90%',
+    paddingVertical: 20,
+    borderBottomWidth: 2,
+    borderBottomColor: '#f5f5f5'
+  },
+  evolveContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  evolveName: {
+    textTransform: 'capitalize',
+    marginTop: 5,
+    color: '#333'
+  },
+  arrowContainer: {
+    alignItems: 'center'
+  },
+  levelText: {
+    fontWeight: '700',
+    fontSize: 13,
+    color: '#444'
+  },
+  movesFlex: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
+  movesContainer: {
+    paddingHorizontal: 7,
+    paddingVertical: 2,
+    elevation: 3,
+    marginBottom: 10,
+    borderRadius: 5,
+    marginRight: 7
+  },
+  movesText: {
+    fontWeight: '700',
+    color: '#fff',
     textTransform: 'capitalize'
   }
 })

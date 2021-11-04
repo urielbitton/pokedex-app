@@ -7,6 +7,7 @@ import BottomNav from './BottomNav'
 import PokeScreen from '../screens/PokeScreen'
 import HomeScreen from '../screens/HomeScreen'
 import PokedexScreen from '../screens/PokedexScreen'
+import AuthScreen from '../screens/AuthScreen'
 
 export default function ScreenNav(props) {
 
@@ -27,6 +28,7 @@ export default function ScreenNav(props) {
         <Stack.Navigator headerMode={false} initialRouteName="Home">  
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Pokedex" component={PokedexScreen} />
+          <Stack.Screen name="Auth" component={AuthScreen} />
             {
               allPokemon.length ? pokeScreensRender : 
               <Stack.Screen name="Loading">

@@ -12,6 +12,7 @@ import { useNavigation } from '@react-navigation/native'
 import TabAbout from './TabAbout'
 import TabBaseStats from './TabBaseStats'
 import TabEvolution from './TabEvolution'
+import TabMoves from './TabMoves'
 import typeColorConvert from '../utilities/typeColorConvert'
 
 export default function PokeScreen(props) {
@@ -120,10 +121,10 @@ export default function PokeScreen(props) {
                 <TabBaseStats stats={pokemon.stats} />
               </TabView.Item>
               <TabView.Item style={styles.tabContent}>
-                <TabEvolution evolution={pokemon?.species ? pokemon?.species?.url : "."}/>
+                <TabEvolution evolution={pokemon?.species ? pokemon?.species?.url : "."} pokemon={pokemon}/>
               </TabView.Item>
               <TabView.Item style={styles.tabContent}>
-                <Text h1>Moves</Text>
+                <TabMoves pokemon={pokemon}/>
               </TabView.Item>
             </TabView>
           </View>

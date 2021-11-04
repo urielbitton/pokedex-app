@@ -11,7 +11,7 @@ const StoreContextProvider = (props) => {
 
   const [allPokemon, setAllPokemon] = useState([])
   const [activeNav, setActiveNav] = useState('')
-  const [pokeLimit, setPokeLimit] = useState(15)
+  const [pokeLimit, setPokeLimit] = useState(25)
   
   const menuLinks = [
     {title: 'Pokedex', color: Colors.aqua},

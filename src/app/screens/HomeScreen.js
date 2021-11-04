@@ -1,9 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { ScrollView, Text, TouchableWithoutFeedback, View, Linking } from 'react-native'
 import Screen from '../components/Screen'
 import { styles } from '../styles/HomeScreen';
-import { Button, Image, Input } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Image } from 'react-native-elements';
 import InfoCard from '../components/InfoCard'
 import { StoreContext } from '../store/context';
 import PageTitle from '../components/PageTitle';
