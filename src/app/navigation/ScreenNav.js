@@ -8,7 +8,7 @@ import BottomNav from './BottomNav'
 import PokeScreen from '../screens/PokeScreen'
 import HomeScreen from '../screens/HomeScreen'
 import PokedexScreen from '../screens/PokedexScreen'
-import AuthScreen from '../screens/AuthScreen'
+import LoginScreen from '../screens/LoginScreen'
 import SearchScreen from '../screens/SearchScreen'
 import FavoritesScreen from '../screens/FavoritesScreen'
 import { Header, Overlay, Button, Image } from 'react-native-elements'
@@ -17,6 +17,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import firebase from 'firebase'
 import logoutImg from '../assets/imgs/logoutImg.png'
 import AddPokeScreen from '../screens/AddPokeScreen'
+import MyPokedexScreen from '../screens/MyPokedexScreen'
 
 export default function ScreenNav(props) {
 
@@ -68,10 +69,11 @@ export default function ScreenNav(props) {
         <Stack.Navigator headerMode={false} initialRouteName="Home">  
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Pokedex" component={PokedexScreen} />
-          <Stack.Screen name="Auth" component={AuthScreen} />
+          <Stack.Screen name="Auth" component={LoginScreen} />
           <Stack.Screen name="Search" component={SearchScreen} />
           <Stack.Screen name="Favorites" component={FavoritesScreen} />
           <Stack.Screen name="AddPoke" component={AddPokeScreen} />
+          <Stack.Screen name="MyPokedex" component={MyPokedexScreen} />
             {
               allPokemon.length ? pokeScreensRender : 
               <Stack.Screen name="Loading">

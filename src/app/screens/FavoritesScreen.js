@@ -32,7 +32,7 @@ export default function FavoritesScreen() {
           <Text style={styles.toolbarText}>{favPokemon.length} Pokemon</Text>
           <Button 
             title="Add"
-            buttonStyle={{backgroundColor: Colors.red, width: 100}}
+            buttonStyle={{backgroundColor: Colors.red, width: 100, borderRadius: 40}}
             onPress={() => navigation.navigate('Pokedex')}
           />
         </View>

@@ -8,6 +8,7 @@ import { StoreContext } from '../store/context';
 import PageTitle from '../components/PageTitle';
 import SearchBar from 'react-native-elements/dist/searchbar/SearchBar-ios';
 import { useNavigation } from '@react-navigation/native'
+import Colors from '../utilities/Colors';
 
 export default function HomeScreen() {
  
@@ -19,6 +20,19 @@ export default function HomeScreen() {
       card={card} 
       key={card.title} 
       onPress={() => navigation.navigate(card.title)}
+    />
+  })
+
+  const myCardsArr = [
+    {title: 'My Pokedex', color: Colors.color, link: 'MyPokedex'},
+    {title: 'My Favorites', color: Colors.red, link: 'Favorites'},
+  ]
+
+  const myCardsRender = myCardsArr?.map((card,i) => {
+    return <InfoCard 
+      card={card} 
+      key={card.title} 
+      onPress={() => navigation.navigate(card.link)}
     />
   })
 
@@ -65,7 +79,12 @@ export default function HomeScreen() {
           </View>
           {newsStoriesRender}
       </View>
-      
+      <View style={styles.myPokemon}>
+        <Text style={styles.myPokemonTitle}>My Pokemon</Text>
+        <View style={styles.myCardsContainer}>
+          {myCardsRender}
+        </View>
+      </View>
       </Screen>
     </ScrollView>
   ) 

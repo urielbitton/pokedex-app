@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react'
 import { View, Text, ScrollView, Image } from 'react-native'
 import Screen from '../components/Screen'
-import { styles } from '../styles/AuthScreen'
+import { styles } from '../styles/LoginScreen'
 import authImg from '../assets/imgs/pokeAuth.png'
 import pokeLogo from '../assets/imgs/pokeLogo.png'
 import { Input, Button } from 'react-native-elements';
@@ -10,7 +10,7 @@ import Colors from '../utilities/Colors'
 import { StoreContext } from '../store/context'
 import firebase from 'firebase'
 
-export default function AuthScreen() {
+export default function LoginScreen() {
 
   const {myUser, setAUser, user} = useContext(StoreContext)
   const [email, setEmail] = useState('') 

@@ -83,5 +83,22 @@ export const styles = StyleSheet.create({
     width: 130,
     height: 80,
     borderRadius: 20
+  },
+  myPokemon: {
+    backgroundColor: '#fff',
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    borderRadius: 20
+  },
+  myPokemonTitle: {
+    fontSize: 24,
+    fontWeight: '700'
+  },
+  myCardsContainer: {
+    marginTop: 15,
+    alignItems: 'center',
+    justifyContent: 'space-around', 
+    flexDirection: 'row', 
+    flexWrap: "wrap"
   }
 })

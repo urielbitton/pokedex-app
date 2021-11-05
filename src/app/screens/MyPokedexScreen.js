@@ -1,39 +1,45 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ScrollView, View, FlatList } from 'react-native'
 import PageTitle from '../components/PageTitle'
-import PokeCard from '../components/PokeCard'
+import MyPokeCard from '../components/MyPokeCard'
 import Screen from '../components/Screen'
 import {styles} from '../styles/PokedexScreen'
 import {StoreContext} from '../store/context'
 import { SpeedDial } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native'
+import { getMyUser } from '../services/UserServices'
 
-export default function PokedexScreen() {
+export default function MyPokedexScreen() {
 
-  const {allPokemon, setPokeLimit, setPageTitle} = useContext(StoreContext)
+  const {setPokeLimit, setPageTitle, user} = useContext(StoreContext)
   const [isRefresh, setIsRefresh] = useState(false)
   const [openDial, setOpenDial] = useState(false)
+  const [myPokedex, setMyPokedex] = useState([])
   const navigation = useNavigation() 
 
   useEffect(() => {
-    setPageTitle('Pokedex')
-    return() => setPokeLimit(15)
+    setPageTitle('My Pokedex')
+    return() => setPokeLimit(25)
   },[])
   
+  useEffect(() => {
+    getMyUser(user.uid, setMyPokedex) 
+  },[user])
+
   return (
     <>
       <ScrollView>
         <Screen showPokeImg>
           <View style={styles.container}>
             <View style={styles.header}>
-              <PageTitle title="Pokedex"/>
+              <PageTitle title="My Pokedex"/>
             </View>
             <View>
               <FlatList 
-                data={allPokemon}
-                keyExtractor={allPokemon => allPokemon.name}
+                data={myPokedex?.myPokedex}
+                keyExtractor={myPokedex => myPokedex.name}
                 renderItem={poke => 
-                  <PokeCard poke={poke.item} pageTitle={poke.item.name}/>
+                  <MyPokeCard poke={poke.item} pageTitle={poke.item.name}/>
                 }
                 contentContainerStyle={styles.pokedexContainer}
                 numColumns={2} 
