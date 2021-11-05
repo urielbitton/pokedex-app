@@ -2,10 +2,11 @@ import React, { useContext, useEffect } from 'react'
 import ScreenNav from '../navigation/ScreenNav';
 import LoginScreen from '../auth/LoginScreen';
 import { StoreContext } from '../store/context';
+import RegisterScreen from './RegisterScreen';
 
 export default function AuthGate() {
 
-  const {user, setMyUser} = useContext(StoreContext)
+  const {user, setMyUser, logAuth, setLogAuth} = useContext(StoreContext)
 
   useEffect(() => {
     if(!user) {
@@ -14,6 +15,10 @@ export default function AuthGate() {
   },[user])
 
   return (
-    user ? <ScreenNav /> : <LoginScreen />
+    user ? 
+    <ScreenNav /> : 
+    logAuth ?
+    <LoginScreen /> :
+    <RegisterScreen />
   )
 }

@@ -12,7 +12,7 @@ import firebase from 'firebase'
 
 export default function LoginScreen() {
 
-  const {myUser, setAUser, user} = useContext(StoreContext)
+  const {setAUser, setLogAuth} = useContext(StoreContext)
   const [email, setEmail] = useState('') 
   const [password, setPassword] = useState('') 
   const [emailError, setEmailError] = useState('') 
@@ -125,7 +125,7 @@ export default function LoginScreen() {
             />
           </View>
           <View style={styles.registerText}>
-            <Text>Don't have an account? <Text style={{fontWeight: '700'}}>Register</Text></Text>
+            <Text>Don't have an account? <Text style={{fontWeight: '700'}} onPress={() => setLogAuth(false)}>Register</Text></Text>
           </View>
         </View>
       </Screen>

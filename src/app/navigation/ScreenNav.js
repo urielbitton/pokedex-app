@@ -18,6 +18,7 @@ import firebase from 'firebase'
 import logoutImg from '../assets/imgs/logoutImg.png'
 import AddPokeScreen from '../screens/AddPokeScreen'
 import MyPokedexScreen from '../screens/MyPokedexScreen'
+import RegisterScreen from '../auth/RegisterScreen'
 
 export default function ScreenNav(props) {
 
@@ -69,7 +70,8 @@ export default function ScreenNav(props) {
         <Stack.Navigator headerMode={false} initialRouteName="Home">  
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Pokedex" component={PokedexScreen} />
-          <Stack.Screen name="Auth" component={LoginScreen} />
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Register" component={RegisterScreen} />
           <Stack.Screen name="Search" component={SearchScreen} />
           <Stack.Screen name="Favorites" component={FavoritesScreen} />
           <Stack.Screen name="AddPoke" component={AddPokeScreen} />

@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
   container: {  
     flex: 1,
     height: '100%', 
-    // paddingTop: Constants.statusBarHeight,
+    paddingTop: Constants.statusBarHeight,
     paddingBottom: 40,
     backgroundColor: 'rgba(200,200,200,0.22)'
   },
