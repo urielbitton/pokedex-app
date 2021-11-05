@@ -3,10 +3,10 @@ import { Text, View, StyleSheet } from 'react-native'
 
 export default function TypeBubble(props) {
 
-  const {name} = props
+  const {name, width="50%"} = props
 
   return (
-    <View style={styles.typeBubble}>
+    <View style={[styles.typeBubble, {width}]}>
       <Text style={styles.type}>{name}</Text>
     </View>
   )
@@ -14,14 +14,13 @@ export default function TypeBubble(props) {
 
 export const styles = StyleSheet.create({ 
   typeBubble: {
-    padding: 2,
+    paddingHorizontal: 2,
     paddingVertical: 4,
     borderRadius: 40,
     backgroundColor: 'rgba(255,255,255,0.2)',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 6,
-    width: '50%'
+    marginBottom: 6
   },
   type: {
     color: '#fff',

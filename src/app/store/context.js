@@ -37,9 +37,11 @@ const StoreContextProvider = (props) => {
   useEffect(() => {
     axios({
       method: 'get', 
-      url: `https://pokeapi.co/api/v2/pokemon?limit=${pokeLimit}`,
+      url: `https://pokeapi.co/api/v2/pokemon?limit=${pokeLimit <= 150 ? pokeLimit : 150}`,
     }).then((res) => {
       setAllPokemon(res.data.results)
+    }).catch((error)=>{
+      console.log("Api call error");
     })
   },[pokeLimit])
 

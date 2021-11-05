@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React from 'react'
 import { Text, View } from 'react-native'
 import Progress from '../components/Progress'

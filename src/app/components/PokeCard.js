@@ -26,6 +26,8 @@ export default function PokeCard(props) {
       url: url,
     }).then((res) => {
       setPokemon(res.data)
+    }).catch((error)=>{
+      console.log("Api call error");
     })
   },[])
 

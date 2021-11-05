@@ -11,7 +11,7 @@ import { getMyUser } from '../services/UserServices'
 
 export default function MyPokedexScreen() {
 
-  const {setPokeLimit, setPageTitle, user} = useContext(StoreContext)
+  const {pokeLimit, setPokeLimit, setPageTitle, user} = useContext(StoreContext)
   const [isRefresh, setIsRefresh] = useState(false)
   const [openDial, setOpenDial] = useState(false)
   const [myPokedex, setMyPokedex] = useState([])
@@ -43,8 +43,8 @@ export default function MyPokedexScreen() {
                 }
                 contentContainerStyle={styles.pokedexContainer}
                 numColumns={2} 
-                onEndReached={() => setPokeLimit(prev => prev + 25)}
-                onEndReachedThreshold={1}
+                onEndReached={() => setPokeLimit(prev => pokeLimit < 150 && prev + 25)}
+                onEndReachedThreshold={0.9}
                 onRefresh={() => setIsRefresh(true)}
                 refreshing={isRefresh}
               />

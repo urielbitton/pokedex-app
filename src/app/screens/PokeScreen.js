@@ -48,8 +48,8 @@ export default function PokeScreen(props) {
   const tabsRender = tabsArr?.map((tab,i) => {
     return <Button 
       title={tab.name} 
-      buttonStyle={[styles.tabButton, tabIndex===i && styles.activeTab]} 
-      titleStyle={[styles.tabTitle, tabIndex===i && styles.activeTitle]} 
+      buttonStyle={[styles.tabButton, tabIndex===i ? styles.activeTab : {}]} 
+      titleStyle={[styles.tabTitle, tabIndex===i ? styles.activeTitle : {}]} 
       onPress={() => setTabIndex(i)}
       key={i}
     />
@@ -75,6 +75,8 @@ export default function PokeScreen(props) {
       url: url,
     }).then((res) => {
       setPokemon(res.data)
+    }).catch((error)=>{
+      console.log("Api call error");
     })
   },[])
 
@@ -107,7 +109,7 @@ export default function PokeScreen(props) {
           <View style={styles.titleBar}>
             <View style={styles.titles}>
               <Text style={styles.pokeName}>{name}</Text>
-              <TypeBubble name={pokemon?.types ? pokemon?.types[0]?.type.name: 'Normal'}/>
+              <TypeBubble name={pokemon?.types ? pokemon?.types[0]?.type.name: 'Normal'} width="70%"/>
             </View>
             <Text style={styles.number}>#{pokeNum}</Text>
           </View>

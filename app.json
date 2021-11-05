@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "pokedex-app",
+    "name": "Pokedex App",
     "slug": "pokedex-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Pokedex app ",
+    "githubUrl": "https://github.com/urielbitton/pokedex-app"
   }
 }

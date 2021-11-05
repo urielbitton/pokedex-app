@@ -25,6 +25,8 @@ export default function TabAbout(props) {
       url: speciesUrl,
     }).then((res) => {
       setSpecies(res.data)
+    }).catch((error)=>{
+      console.log("Api call error");
     })
   },[speciesUrl])
 
@@ -35,7 +37,7 @@ export default function TabAbout(props) {
           {columnTitleRender1}
         </View>
         <View style={styles.tabColumnText}>
-          <Text style={styles.columnText}>{species?.egg_groups && species?.egg_groups[0]?.name}</Text>
+          <Text style={styles.columnText}>{species?.egg_groups ? species.egg_groups[0].name : ""}</Text>
           <Text style={styles.columnText}>{pokemon.height} <Text style={{textTransform:'lowercase'}}>cm</Text></Text>
           <Text style={styles.columnText}>{pokemon.weight} <Text style={{textTransform:'lowercase'}}>kg</Text></Text>
           <View style={styles.abilities}>{abilitiesRender}</View>
@@ -50,9 +52,9 @@ export default function TabAbout(props) {
         </View>
         <View style={styles.tabColumnText}>
           <Text style={styles.columnText}>{pokemon.base_experience}</Text>
-          <Text style={styles.columnText}>{species?.habitat && species?.habitat?.name}</Text>
-          <Text style={styles.columnText}>{species?.generation && species?.generation?.name}</Text>
-          <Text style={styles.columnText}>{species?.color && species?.color?.name}</Text>
+          <Text style={styles.columnText}>{species?.habitat ? species.habitat.name : ""}</Text>
+          <Text style={styles.columnText}>{species?.generation ? species.generation.name : ""}</Text>
+          <Text style={styles.columnText}>{species?.color ? species.color.name : ""}</Text>
         </View>
       </View>
       <View style={styles.tabSection}>
@@ -60,7 +62,7 @@ export default function TabAbout(props) {
       </View>
       <View>
         <Text numberOfLines={1} style={{ flex: 1, textAlign: "left",width:'80%' }}>
-          {species?.flavor_text_entries && species.flavor_text_entries[0].flavor_text}
+          {species?.flavor_text_entries ? species.flavor_text_entries[0].flavor_text : ""}
         </Text>
       </View>
     </View>

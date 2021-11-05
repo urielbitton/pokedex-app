@@ -1,5 +1,4 @@
 import React from 'react'
-import Constants from 'expo-constants'
 import {SafeAreaView, StyleSheet, View, Image} from 'react-native'
 import pokedexImg from '../assets/imgs/pokeball-gray.png'
 
@@ -23,12 +22,12 @@ const styles = StyleSheet.create({
     },
     pokedexImg: {
         position: 'absolute',
-        top: -60,
-        right: -65,
+        top: -85,
+        right: -55,
         zIndex: 1,
-        width: 200,
-        height: 200,
-        opacity: 0.2
+        width: 160,
+        height: 160,
+        opacity: 0.25
     },
     img: {
         width: 200,

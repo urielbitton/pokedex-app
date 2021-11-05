@@ -17,6 +17,8 @@ export default function TabEvolution(props) {
       url: evolution,
     }).then((res) => {
       setChain(res.data)
+    }).catch((error)=>{
+      console.log("Api call error");
     })
   },[evolution])
 
@@ -26,13 +28,15 @@ export default function TabEvolution(props) {
       url: chain?.evolution_chain?.url,
     }).then((res) => {
       setEvolve(res.data)
+    }).catch((error)=>{
+      console.log("Api call error");
     })
   },[chain])
 
   return (
     <View>
       <Text style={styles.sectionTitle}>Evolution Chain</Text>
-      { evolve?.chain?.evolves_to?.length &&
+      { evolve?.chain?.evolves_to?.length ?
         <View style={styles.evolutionRow}>
         <View style={styles.evolveContainer}>
           <Image 
@@ -54,7 +58,7 @@ export default function TabEvolution(props) {
           <Image source={pokeballImg} style={{position: 'absolute',top: -5,width:70,height:70,opacity:0.25}}/>
           <Text style={styles.evolveName}>{evolve?.chain?.evolves_to[0]?.species?.name}</Text>
         </View>
-      </View>}
+      </View> : <></>}
 
       { evolve?.chain?.evolves_to[0]?.evolves_to?.length ?
       <View style={styles.evolutionRow}>

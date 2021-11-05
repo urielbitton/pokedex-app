@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     fontWeight: '700',
-    marginBottom: 20,
+    marginBottom: 10,
     padding: 5
   }
 })

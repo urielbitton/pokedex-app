@@ -7,8 +7,7 @@ let ScreenHeight = Dimensions.get("window").height;
 export const styles = StyleSheet.create({ 
   container: {
     flex: 1,
-    zIndex: 100,
-    // paddingTop: Constants.statusBarHeight
+    zIndex: 100
   },
   sqBlob: {
     position: 'absolute',
