@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import ScreenNav from '../navigation/ScreenNav';
-import LoginScreen from '../screens/LoginScreen';
+import LoginScreen from '../auth/LoginScreen';
 import { StoreContext } from '../store/context';
 
 export default function AuthGate() {
