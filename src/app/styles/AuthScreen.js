@@ -6,8 +6,8 @@ export const styles = StyleSheet.create({
   container: {  
     flex: 1,
     height: '100%', 
-    paddingTop: Constants.statusBarHeight,
-    paddingBottom: 30,
+    // paddingTop: Constants.statusBarHeight,
+    paddingBottom: 40,
     backgroundColor: 'rgba(200,200,200,0.22)'
   },
   authImgContainer: {
@@ -54,7 +54,8 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    top: -10
+    top: -5,
+    width: '100%'
   },
   forgotText: {
     fontSize: 13,
@@ -64,7 +65,7 @@ export const styles = StyleSheet.create({
   loginBtnContainer: {
     width: '100%',
     paddingHorizontal: 35,
-    marginTop: 30
+    marginTop: 20
   },
   loginBtn: {
     paddingVertical: 20

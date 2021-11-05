@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     zIndex: 100,
-    paddingTop: Constants.statusBarHeight
+    // paddingTop: Constants.statusBarHeight
   },
   sqBlob: {
     position: 'absolute',

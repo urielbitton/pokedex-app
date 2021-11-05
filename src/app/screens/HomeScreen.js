@@ -8,11 +8,10 @@ import { StoreContext } from '../store/context';
 import PageTitle from '../components/PageTitle';
 import SearchBar from 'react-native-elements/dist/searchbar/SearchBar-ios';
 import { useNavigation } from '@react-navigation/native'
-import { db } from '../firebase/Fire';
 
 export default function HomeScreen() {
  
-  const {menuLinks, newsStories} = useContext(StoreContext)
+  const {menuLinks, newsStories, setPageTitle} = useContext(StoreContext)
   const navigation = useNavigation() 
 
   const cardsRender = menuLinks?.map((card) => {
@@ -42,11 +41,7 @@ export default function HomeScreen() {
     </TouchableWithoutFeedback>
   })
 
-  useEffect(() => {
-    db.collection('test').doc('test').onSnapshot(snap => {
-      console.log(snap.data())
-    })
-  },[])
+  useEffect(() => setPageTitle('Home'), [navigation]) 
 
   return (
     <ScrollView>
@@ -57,6 +52,7 @@ export default function HomeScreen() {
           placeholder='Search pokemon, move, ability, etc'
           inputContainerStyle={styles.inputContainer}
           inputStyle={styles.inputStyles} 
+          onTouchEnd={() => navigation.navigate('Search')}
         />
         <View style={styles.cardContainer}>
           {cardsRender}
@@ -69,6 +65,7 @@ export default function HomeScreen() {
           </View>
           {newsStoriesRender}
       </View>
+      
       </Screen>
     </ScrollView>
   ) 

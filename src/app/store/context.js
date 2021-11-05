@@ -1,9 +1,11 @@
 import React, {createContext, useEffect, useState} from 'react'
 import axios from 'axios'
+import firebase from 'firebase'
 import Colors from '../utilities/Colors'
 import newsImg1 from '../assets/imgs/news1.jpg'
 import newsImg2 from '../assets/imgs/news2.webp'
 import newsImg3 from '../assets/imgs/news3.jpg'
+import {db} from '../firebase/Fire'
 
 export const StoreContext = createContext()
 
@@ -12,7 +14,11 @@ const StoreContextProvider = (props) => {
   const [allPokemon, setAllPokemon] = useState([])
   const [activeNav, setActiveNav] = useState('')
   const [pokeLimit, setPokeLimit] = useState(25)
-  const [login, setLogin] = useState(false)
+  const user = firebase.auth().currentUser
+  const [myUser, setMyUser] = useState({})
+  const [aUser, setAUser] = useState({})
+  const [pageTitle, setPageTitle] = useState('Pokedex')
+  const [allFavs, setAllFavs] = useState([])
   
   const menuLinks = [
     {title: 'Pokedex', color: Colors.aqua},
@@ -36,11 +42,20 @@ const StoreContextProvider = (props) => {
       setAllPokemon(res.data.results)
     })
   },[pokeLimit])
+
+  useEffect(() => {
+    if(user) {
+      db.collection('users').doc(user.uid).onSnapshot(snap => {
+        setMyUser(snap.data()) 
+      })
+    }
+  },[user])
  
   return (
     <StoreContext.Provider value={{
       allPokemon, setAllPokemon, menuLinks, newsStories, activeNav, setActiveNav, 
-      pokeLimit, setPokeLimit, login, setLogin
+      pokeLimit, setPokeLimit, user, myUser, setMyUser, aUser, setAUser, pageTitle, setPageTitle,
+      allFavs, setAllFavs
     }}>
       {props.children}
     </StoreContext.Provider>

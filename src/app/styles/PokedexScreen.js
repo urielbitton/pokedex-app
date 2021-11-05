@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'; 
 import Constants from 'expo-constants'
+import Colors from '../utilities/Colors';
 
 export const styles = StyleSheet.create({ 
   header: {
@@ -11,5 +12,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between', 
     padding: 20
+  },
+  speedDialBtn: {
+    backgroundColor: Colors.red
   }
 })

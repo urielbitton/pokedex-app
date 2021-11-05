@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native'
 export default function PokeCard(props) {
 
   const {name, url} = props.poke
-  const {pageTitle} = props
+  const {pageTitle, width='48%'} = props
   const [pokemon, setPokemon] = useState({})
   const navigation = useNavigation() 
   const artwork = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`
@@ -31,7 +31,7 @@ export default function PokeCard(props) {
 
   return (
     <TouchableOpacity 
-      style={[styles.pokeCard, {backgroundColor:typeColorConvert(pokemon?.types ? pokemon?.types[0]?.type.name: Colors.color)}]} 
+      style={[styles.pokeCard, {backgroundColor:typeColorConvert(pokemon?.types ? pokemon?.types[0]?.type.name: Colors.color), flexBasis:width}]} 
       activeOpacity={.7}
       onPress={() => navigation.navigate(pageTitle)}
     >

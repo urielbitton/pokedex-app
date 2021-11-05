@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ScrollView, View, TouchableWithoutFeedback, TouchableOpacity, Text, Image, Animated, Easing } from 'react-native'
 import {styles} from '../styles/PokeScreen'
 import Colors from '../utilities/Colors'
@@ -14,11 +14,14 @@ import TabBaseStats from './TabBaseStats'
 import TabEvolution from './TabEvolution'
 import TabMoves from './TabMoves'
 import typeColorConvert from '../utilities/typeColorConvert'
+import {StoreContext} from '../store/context'
+import { updateDB } from '../services/CrudDB'
+import { getMyUser } from '../services/UserServices'
 
 export default function PokeScreen(props) {
 
+  const {setPageTitle, user, allFavs, setAllFavs} = useContext(StoreContext)
   const {name, url} = props.poke
-  const [favorite, setFavorite] = useState(true)
   const [tabIndex, setTabIndex] = useState(0)
   const [pokemon, setPokemon] = useState({})
   const navigation = useNavigation() 
@@ -27,8 +30,12 @@ export default function PokeScreen(props) {
   const rotateValueHolder = new Animated.Value(0)
   const artwork = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`
 
-  const addToFavorite = () => {
-    setFavorite(prev => !prev)
+  const toggleFavorite = () => {
+    if(!allFavs?.favorites?.includes(name)) 
+      allFavs?.favorites?.push(name) 
+    else
+      allFavs?.favorites?.splice(allFavs?.favorites?.indexOf(name), 1)
+    updateDB('users', user.uid, allFavs)
   }
 
   const tabsArr = [
@@ -48,19 +55,6 @@ export default function PokeScreen(props) {
     />
   })
 
-  useEffect(() => {
-    axios({
-      method: 'get', 
-      url: url,
-    }).then((res) => {
-      setPokemon(res.data)
-    })
-  },[])
-
-  useEffect(() => {
-    startImageRotateFunction()
-  },[pokemon, tabIndex])
-
   const startImageRotateFunction = () => {
     rotateValueHolder.setValue(0);
     Animated.timing(rotateValueHolder, {
@@ -75,6 +69,25 @@ export default function PokeScreen(props) {
     outputRange: ['0deg', '360deg'],
   });
 
+  useEffect(() => {
+    axios({
+      method: 'get', 
+      url: url,
+    }).then((res) => {
+      setPokemon(res.data)
+    })
+  },[])
+
+  useEffect(() => {
+    startImageRotateFunction()
+  },[pokemon, tabIndex])
+
+  useEffect(() => {
+    getMyUser(user.uid, setAllFavs)
+  },[user])
+
+  useEffect(() => setPageTitle(name), [navigation]) 
+
   return (
     <ScrollView>
       <Screen>
@@ -87,8 +100,8 @@ export default function PokeScreen(props) {
             >
               <FontAwesome name="angle-left" size={33} color="#fff" />
             </TouchableOpacity>
-            <TouchableWithoutFeedback onPress={() => addToFavorite()}>
-              <Ionicons name={favorite?"ios-heart":"ios-heart-outline"} size={30} color="#fff" />
+            <TouchableWithoutFeedback onPress={() => toggleFavorite()}>
+              <Ionicons name={allFavs?.favorites?.includes(name)?"ios-heart":"ios-heart-outline"} size={30} color="#fff" />
             </TouchableWithoutFeedback> 
           </View>
           <View style={styles.titleBar}>

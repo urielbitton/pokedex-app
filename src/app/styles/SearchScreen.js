@@ -1,10 +1,8 @@
 import { StyleSheet } from 'react-native'; 
-import Constants from 'expo-constants'
 
 export const styles = StyleSheet.create({ 
   container: {
-    paddingHorizontal: 20,
-    paddingTop: Constants.statusBarHeight
+    paddingHorizontal: 20
   },  
   mainTitle: {
     fontSize: 30,

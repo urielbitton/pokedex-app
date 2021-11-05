@@ -12,8 +12,7 @@ export const styles = StyleSheet.create({
     overflow: 'hidden',
     marginHorizontal: 7,
     marginVertical: 7,
-    backgroundColor: Colors.color,
-    flexBasis: '48%'
+    backgroundColor: Colors.color
   },
   pokeCardFlex: {
     display: "flex",
