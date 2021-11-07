@@ -19,7 +19,6 @@ export default function MyPokedexScreen() {
 
   useEffect(() => {
     setPageTitle('My Pokedex')
-    return() => setPokeLimit(25)
   },[])
   
   useEffect(() => {

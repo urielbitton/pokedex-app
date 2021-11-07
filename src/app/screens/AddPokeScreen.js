@@ -2,14 +2,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ScrollView, Text, View, Image, Picker, TouchableOpacity } from 'react-native'
 import { styles } from '../styles/AddPokeScreen'
 import pokeballColor from '../assets/imgs/pokeball-color.png'
-import pokeballImg from '../assets/imgs/pokeball-gray.png'
 import { Button, Input } from 'react-native-elements'
 import { updateDB } from '../services/CrudDB'
 import {StoreContext} from '../store/context'
 import { useNavigation } from '@react-navigation/native'
 import { getMyUser } from '../services/UserServices'
-import * as ImagePicker from "react-native-image-picker"
-import { AntDesign } from '@expo/vector-icons';
+import ImagePicker from '../utilities/ImagePicker'
+import UploadFireStorage from '../utilities/ImgurUpload'
+import ImgurUpload from '../utilities/ImgurUpload'
 
 export default function AddPokeScreen() {
 
@@ -22,9 +22,9 @@ export default function AddPokeScreen() {
   const [height, setHeight] = useState('')
   const [weight, setWeight] = useState('')
   const [description, setDescription] = useState('')
-  const [imageUrl, setImageUrl] = useState('')
+  const [imgUrl, setImgUrl] = useState(null)
+  const [storageUrl, setStorageUrl] = useState('')
   const [myPokedex, setMyPokedex] = useState([])
-  const [upload, setUpload] = useState(null);
   const navigation = useNavigation() 
 
   const typesArr = ['Pokemon Type','grass','fire','water','poison','normal','ice','electric','ground','flying','bug']
@@ -39,10 +39,11 @@ export default function AddPokeScreen() {
 
   const addPokemon = () => {
     if(name.length) {
-      const pokemonObj = { name, type1, type2, pokeNum, species, height, weight, description, imageUrl }
+      ImgurUpload(imgUrl)
+      const pokemonObj = { name, type1, type2, pokeNum, species, height, weight, description, imageUrl: imgUrl }
       myPokedex?.myPokedex.push(pokemonObj)
       updateDB('users', user.uid, myPokedex).then(() => {
-        navigation.navigate('Pokedex')
+        navigation.navigate('MyPokedex')
         window.alert('The pokemon was successfully added to your personal pokedex.')
       })
     }
@@ -50,29 +51,6 @@ export default function AddPokeScreen() {
       window.alert('Please fill in all required fields.')
     }
   }
-
-  const selectImage = () => {
-    const options = {
-      maxWidth: 2000,
-      maxHeight: 2000,
-      storageOptions: {
-        skipBackup: true,
-        path: 'images'
-      }
-    };
-    ImagePicker.showImagePicker(options, response => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        const source = { uri: response.uri };
-        setUpload(source);
-      }
-    });
-  };
 
   useEffect(() => {
     getMyUser(user.uid, setMyPokedex) 
@@ -92,19 +70,10 @@ export default function AddPokeScreen() {
           <Text style={styles.pageSubtitle}>Add and manage pokemon to your personal collection.</Text>
         </View>
         <View style={styles.formContainer}>
-          <View style={styles.imgUploadContainer}>
-            <TouchableOpacity 
-              style={styles.imgUploadCircle} 
-              activeOpacity={0.8} 
-              onPress={() => selectImage()}
-            >
-              <Image 
-                source={pokeballImg}
-                style={{width: 80,height:80,opacity:0.3}}
-              />
-              <AntDesign name="pluscircle" size={24} color="#777" style={styles.addIcon} />
-            </TouchableOpacity>
-          </View>
+          <ImagePicker 
+            imgUrl={imgUrl} 
+            setImgUrl={setImgUrl} 
+          />
           <Input
             placeholder="Pokemon Name *"
             inputContainerStyle={styles.inputContainers}

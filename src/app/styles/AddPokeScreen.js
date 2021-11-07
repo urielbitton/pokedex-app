@@ -52,25 +52,6 @@ export const styles = StyleSheet.create({
     width: '100%',
     color: '#777'
   },
-  imgUploadContainer: {
-    justifyContent: 'center',
-    marginBottom: 20
-  },
-  imgUploadCircle: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-    backgroundColor: '#fff',
-    elevation: 3,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },  
-  addIcon: {
-    position: 'absolute',
-    bottom: 13,
-    right: 10,
-    elevation: 5
-  },
   btnContainer: {
     marginBottom: 30,
     width: '100%',

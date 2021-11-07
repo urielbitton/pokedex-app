@@ -30,7 +30,6 @@ export default function SearchScreen() {
 
   useEffect(() => {
     setPokeLimit(150)
-    return() => setPokeLimit(25)
   },[])
 
   return (

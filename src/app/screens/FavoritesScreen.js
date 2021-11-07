@@ -21,7 +21,6 @@ export default function FavoritesScreen() {
   useEffect(() => {
     getMyUser(user.uid, setAllFavs)
     setPokeLimit(150)
-    return() => setPokeLimit(25)
   },[user]) 
 
   return (

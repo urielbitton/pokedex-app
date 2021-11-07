@@ -15,7 +15,7 @@ export default function PokedexScreen() {
   const {allPokemon, setPokeLimit, setPageTitle} = useContext(StoreContext)
   const [isRefresh, setIsRefresh] = useState(false)
   const [openDial, setOpenDial] = useState(false)
-  const [sort, setSort] = useState(0)
+  const [sort, setSort] = useState(1)
   const navigation = useNavigation() 
 
   const allPokemonSorted = (num) => {
@@ -34,7 +34,6 @@ export default function PokedexScreen() {
   useEffect(() => {
     setPageTitle('Pokedex')
     setPokeLimit(25)
-    return() => setPokeLimit(25)
   },[])
   
   return (
@@ -69,7 +68,7 @@ export default function PokedexScreen() {
               numColumns={2} 
               maxToRenderPerBatch={25}
               onEndReached={() => setPokeLimit(prev => prev + 25)}
-              onEndReachedThreshold={0.9}
+              onEndReachedThreshold={0.8}
               onRefresh={() => setIsRefresh(true)}
               refreshing={false}
               getItemLayout={(data, index) => (

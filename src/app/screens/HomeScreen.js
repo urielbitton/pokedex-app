@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ScrollView, Text, TouchableWithoutFeedback, View, Linking } from 'react-native'
 import Screen from '../components/Screen'
 import { styles } from '../styles/HomeScreen';
@@ -12,8 +12,10 @@ import Colors from '../utilities/Colors';
 
 export default function HomeScreen() {
  
-  const {menuLinks, newsStories, setPageTitle} = useContext(StoreContext)
+  const {menuLinks, newsStories, setPageTitle, user} = useContext(StoreContext)
+  const [dayTime, setDayTime] = useState('')
   const navigation = useNavigation() 
+  const time = new Date().getHours()
 
   const cardsRender = menuLinks?.map((card) => {
     return <InfoCard 
@@ -55,12 +57,22 @@ export default function HomeScreen() {
     </TouchableWithoutFeedback>
   })
 
+  useEffect(() => {
+    if(time >= 0 && time < 12) 
+      setDayTime('Morning') 
+    else if(time >= 12 && time <=18)
+      setDayTime('Afternoon')
+    else  
+      setDayTime('Evening') 
+  },[time])
+
   useEffect(() => setPageTitle('Home'), [navigation]) 
 
   return (
     <ScrollView>
       <Screen style={{backgroundColor:'#eee'}} showPokeImg>
         <View style={styles.container}>
+        <Text style={styles.greetText}>Good {dayTime}, {user.displayName}</Text>
         <PageTitle title="What pokemon are you looking for?"/>
         <SearchBar 
           placeholder='Search pokemon, move, ability, etc'

@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react'
 import { View, Text, ScrollView, Image } from 'react-native'
 import Screen from '../components/Screen'
-import { styles } from '../styles/LoginScreen'
+import { styles } from '../styles/AuthStyles'
 import authImg from '../assets/imgs/pokeAuth.png'
 import pokeLogo from '../assets/imgs/pokeLogo.png'
 import { Input, Button } from 'react-native-elements';
@@ -20,14 +20,12 @@ export default function LoginScreen() {
   const [isLogging, setIsLogging] = useState(false)
 
   const handleLogin = () => { 
-    setIsLogging(true)
     clearErrors()
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(() => {
       authListener()
     })
     .catch(err => {
-      setIsLogging(false)
       switch(err.code) {
         case "auth/invalid-email":
             return setEmailError('Make sure to enter a valid email.')
@@ -46,7 +44,6 @@ export default function LoginScreen() {
     firebase.auth().onAuthStateChanged(user => {
       if(user) {
         setAUser(user)
-        clearInputs()
       }
       else {
         setAUser(null)
@@ -57,14 +54,9 @@ export default function LoginScreen() {
     setEmailError('')
     setPassError('')
   }
-  const clearInputs = () => {
-    setEmail('')
-    setPassword('')
-  }
+
   useEffect(() => { 
-    clearInputs()
     authListener() 
-    return () => setIsLogging(false)
   },[])
 
   return (

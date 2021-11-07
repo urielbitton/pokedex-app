@@ -9,7 +9,12 @@ export const styles = StyleSheet.create({
     paddingBottom: 20,
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
-    paddingTop: Constants.statusBarHeight
+    paddingTop: 30
+  },
+  greetText: {
+    color: '#777',
+    fontSize: 16,
+    paddingLeft: 5
   },
   inputContainer: {
     display: 'flex',

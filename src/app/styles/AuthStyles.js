@@ -39,7 +39,8 @@ export const styles = StyleSheet.create({
   subtitle: {
     fontSize: 15,
     color: '#999',
-    marginBottom: 30
+    marginBottom: 30,
+    textTransform: 'uppercase'
   },
   inputContainer: {
     backgroundColor: '#f9f9f9',
