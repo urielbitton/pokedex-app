@@ -7,30 +7,31 @@ import PokeCard from '../components/PokeCard'
 import notFoundImg from '../assets/imgs/404.png'
 import { useNavigation } from '@react-navigation/native'
 import { ScrollView } from 'react-native-gesture-handler';
+import axios from 'axios';
+import SearchCard from '../components/SearchCard';
 
 export default function SearchScreen() {
 
-  const {allPokemon, setPageTitle, setPokeLimit} = useContext(StoreContext)
+  const {setPageTitle} = useContext(StoreContext)
+  const [pokemon, setPokemon] = useState({})
   const [keyword, setKeyword] =  useState('')
-  const clean = text => text.replace(/[^a-zA-Z0-9 ]/g, "")
-  let pattern = new RegExp('\\b' + clean(keyword), 'i')
-  const searchFilter = allPokemon?.filter(x => pattern.test(x.name) && keyword.length)
+  const [notFound, setNotFound] = useState(false)
   const navigation = useNavigation() 
-
-  const pokedex = searchFilter.map((poke,i) => {
-    return <PokeCard 
-      poke={poke} 
-      pageTitle={poke.name} 
-      width={300}
-      key={poke.name} 
-    />
-  })
 
   useEffect(() => setPageTitle('Search'), [navigation]) 
 
   useEffect(() => {
-    setPokeLimit(150)
-  },[])
+    axios({
+      method: 'get', 
+      url: `https://pokeapi.co/api/v2/pokemon/${keyword.toLowerCase()}`,
+    }).then((res) => {
+      setPokemon(res.data)
+      setNotFound(false)
+    }).catch((error)=>{
+      console.log("Api call error");
+      setNotFound(true)
+    })
+  },[keyword])
 
   return (
     <ScrollView>
@@ -44,8 +45,14 @@ export default function SearchScreen() {
           value={keyword}
         />
         <View style={styles.resultsContainer}>
-          { searchFilter.length?
-            pokedex : keyword.length ?
+          { pokemon.name && !notFound?
+            <SearchCard 
+              poke={pokemon} 
+              pageTitle={pokemon?.species?.name} 
+              width={300}
+              key={pokemon?.species?.name} 
+            /> : 
+            keyword.length || notFound ?
             <View style={styles.noResults}>
               <Image 
                 source={notFoundImg}
