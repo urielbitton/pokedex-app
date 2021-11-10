@@ -22,16 +22,11 @@ import RegisterScreen from '../auth/RegisterScreen'
 
 export default function ScreenNav(props) {
 
-  const {allPokemon, pageTitle} = useContext(StoreContext)
+  const {pageTitle} = useContext(StoreContext)
   const [showOverlay, setShowOverlay] = useState(false)
   const Stack = createStackNavigator()
   const navigRef = useRef() 
 
-  const pokeScreensRender = allPokemon?.map((poke,i) => {
-    return <Stack.Screen name={poke.name} key={i}>
-        {props => <PokeScreen poke={poke} key={poke.id}/>} 
-    </Stack.Screen>
-  }) 
   const confirmLogOut = () => {
     firebase.auth().signOut().then(() => {
       setShowOverlay(false)
@@ -39,7 +34,7 @@ export default function ScreenNav(props) {
   }
 
   return ( 
-    <View style={styles.homecont}> 
+    <View> 
       <Header
           leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
           centerComponent={{ text: pageTitle, style: {color: '#fff', fontSize: 20, fontWeight: '600', textTransform:'capitalize'} }}
@@ -76,12 +71,7 @@ export default function ScreenNav(props) {
           <Stack.Screen name="Favorites" component={FavoritesScreen} />
           <Stack.Screen name="AddPoke" component={AddPokeScreen} />
           <Stack.Screen name="MyPokedex" component={MyPokedexScreen} />
-            {
-              allPokemon.length ? pokeScreensRender : 
-              <Stack.Screen name="Loading">
-                {props => <Text>Loading</Text>}
-              </Stack.Screen>
-            }
+          <Stack.Screen name="PokeScreen" component={PokeScreen} />
         </Stack.Navigator>
         <BottomNav navigRef={navigRef} />
       </NavigationContainer>

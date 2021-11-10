@@ -21,7 +21,7 @@ import { getMyUser } from '../services/UserServices'
 export default function PokeScreen(props) {
 
   const {setPageTitle, user, allFavs, setAllFavs} = useContext(StoreContext)
-  const {name, url} = props.poke
+  const {name, url} = props.route.params
   const [tabIndex, setTabIndex] = useState(0)
   const [pokemon, setPokemon] = useState({})
   const navigation = useNavigation() 
@@ -78,7 +78,7 @@ export default function PokeScreen(props) {
     }).catch((error)=>{
       console.log("Api call error");
     })
-  },[])
+  },[name])
 
   useEffect(() => {
     startImageRotateFunction()

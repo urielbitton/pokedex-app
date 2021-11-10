@@ -35,7 +35,7 @@ export default function PokeCard(props) {
     <TouchableOpacity 
       style={[styles.pokeCard, {backgroundColor:typeColorConvert(pokemon?.types ? pokemon?.types[0]?.type.name: Colors.color), flexBasis:width}]} 
       activeOpacity={.7}
-      onPress={() => navigation.navigate(pageTitle)}
+      onPress={() => navigation.navigate('PokeScreen', {name, url})} 
     >
       <View style={styles.pokeCardFlex}> 
         <View style={styles.infoContainer}>

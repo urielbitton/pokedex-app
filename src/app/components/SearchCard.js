@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native'
 
 export default function SearchCard(props) {
 
-  const {id, name, types} = props.poke
+  const {id, name, types, species} = props.poke
   const {pageTitle, width='48%'} = props
   const navigation = useNavigation() 
   const artwork = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
@@ -22,7 +22,7 @@ export default function SearchCard(props) {
     <TouchableOpacity 
       style={[styles.pokeCard, {backgroundColor:typeColorConvert(types ? types[0]?.type.name: Colors.color), flexBasis:width}]} 
       activeOpacity={.7}
-      onPress={() => navigation.navigate(pageTitle)}
+      onPress={() => navigation.navigate("PokeScreen", {name, url: species.url.replace('-species','')})} 
     >
       <View style={styles.pokeCardFlex}> 
         <View style={styles.infoContainer}>
