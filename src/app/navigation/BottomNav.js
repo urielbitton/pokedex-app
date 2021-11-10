@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native'
-import { AntDesign, MaterialCommunityIcons  } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons'
 import Colors from '../utilities/Colors' 
 import { StoreContext } from '../store/context'
 

@@ -6,7 +6,7 @@ import RegisterScreen from './RegisterScreen';
 
 export default function AuthGate() {
 
-  const {user, setMyUser, logAuth, setLogAuth} = useContext(StoreContext)
+  const {user, setMyUser, logAuth} = useContext(StoreContext)
 
   useEffect(() => {
     if(!user) {

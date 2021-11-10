@@ -34,7 +34,7 @@ export default function ScreenNav(props) {
   }
 
   return ( 
-    <View> 
+    <View style={styles.homecont}> 
       <Header
           leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
           centerComponent={{ text: pageTitle, style: {color: '#fff', fontSize: 20, fontWeight: '600', textTransform:'capitalize'} }}
