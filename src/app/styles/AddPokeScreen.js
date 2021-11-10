@@ -61,5 +61,11 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     height: 40,
     backgroundColor: Colors.red
+  },
+  btnGroup: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   }
 })

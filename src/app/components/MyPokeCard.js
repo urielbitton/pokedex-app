@@ -10,14 +10,17 @@ import { useNavigation } from '@react-navigation/native'
 export default function MyPokeCard(props) {
 
   const {name, pokeNum, description, height, weight, type1, type2, species, imageUrl} = props.poke
-  const {pageTitle, width='48%'} = props
+  const {width='48%'} = props
   const navigation = useNavigation() 
 
   return (
     <TouchableOpacity 
       style={[styles.pokeCard, {backgroundColor:typeColorConvert(type1 ?? Colors.color), flexBasis:width}]} 
       activeOpacity={.7}
-      onPress={() => navigation.navigate(pageTitle)}
+      onPress={() => {
+        navigation.navigate("MyPokeScreen", 
+        {name, pokeNum, description, height, weight, type1, type2, species, imageUrl}
+      )}}
     >
       <View style={styles.pokeCardFlex}> 
         <View style={styles.infoContainer}>

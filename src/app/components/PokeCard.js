@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native'
 export default function PokeCard(props) {
 
   const {name, url} = props.poke
-  const {pageTitle, width='48%'} = props
+  const {width='48%'} = props
   const [pokemon, setPokemon] = useState({})
   const navigation = useNavigation() 
   const artwork = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`

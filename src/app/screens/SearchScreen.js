@@ -15,6 +15,7 @@ export default function SearchScreen() {
   const {setPageTitle} = useContext(StoreContext)
   const [pokemon, setPokemon] = useState({})
   const [keyword, setKeyword] =  useState('')
+  const [submit, setSubmit] = useState('')
   const [notFound, setNotFound] = useState(false)
   const navigation = useNavigation() 
 
@@ -23,7 +24,7 @@ export default function SearchScreen() {
   useEffect(() => {
     axios({
       method: 'get', 
-      url: `https://pokeapi.co/api/v2/pokemon/${keyword.toLowerCase()}`,
+      url: `https://pokeapi.co/api/v2/pokemon/${submit.toLowerCase()}`,
     }).then((res) => {
       setPokemon(res.data)
       setNotFound(false)
@@ -31,7 +32,7 @@ export default function SearchScreen() {
       console.log("Api call error");
       setNotFound(true)
     })
-  },[keyword])
+  },[submit])
 
   return (
     <ScrollView>
@@ -43,7 +44,11 @@ export default function SearchScreen() {
           inputStyle={styles.inputStyles} 
           onChangeText={(text) => setKeyword(text)}
           value={keyword}
+          cancelButtonTitle=""
+          onSubmitEditing={() => setSubmit(keyword)}
+          onClear={() => setSubmit('')}
         />
+        <Text style={styles.smallText}>Press enter/done to search...</Text>
         <View style={styles.resultsContainer}>
           { pokemon.name && !notFound?
             <SearchCard 
@@ -52,7 +57,7 @@ export default function SearchScreen() {
               width={300}
               key={pokemon?.species?.name} 
             /> : 
-            keyword.length || notFound ?
+            submit.length || notFound ?
             <View style={styles.noResults}>
               <Image 
                 source={notFoundImg}

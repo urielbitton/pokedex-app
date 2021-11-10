@@ -187,5 +187,13 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#fff',
     textTransform: 'capitalize'
+  },
+  editPokeCont: {
+    borderRadius: 40,
+    marginTop: 5,
+    width: 80
+  },
+  editPokeBtn: {
+    backgroundColor: 'rgba(255,255,255,0.75)',
   }
 })

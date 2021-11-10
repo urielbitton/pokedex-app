@@ -9,18 +9,19 @@ import { useNavigation } from '@react-navigation/native'
 import { getMyUser } from '../services/UserServices'
 import ImagePicker from '../utilities/ImagePicker'
 
-export default function AddPokeScreen() {
+export default function AddPokeScreen(props) {
 
   const {user} = useContext(StoreContext)
-  const [name, setName] = useState('')
-  const [type1, setType1] = useState('')
-  const [type2, setType2] = useState('') 
-  const [pokeNum, setPokeNum] = useState('')
-  const [species, setSpecies] = useState('')
-  const [height, setHeight] = useState('')
-  const [weight, setWeight] = useState('')
-  const [description, setDescription] = useState('')
-  const [imgUrl, setImgUrl] = useState(null)
+  const {name, pokeNum, description, height, imageUrl, species, type1, type2, weight} = props.route.params
+  const [editName, setEditName] = useState('')
+  const [editType1, setEditType1] = useState('')
+  const [editType2, setEditType2] = useState('') 
+  const [editPokeNum, setEditPokeNum] = useState('')
+  const [editSpecies, setEditSpecies] = useState('')
+  const [editHeight, setEditHeight] = useState('')
+  const [editWeight, setEditWeight] = useState('')
+  const [editDescription, setEditDescription] = useState('')
+  const [editImgUrl, setEditImgUrl] = useState(null)
   const [myPokedex, setMyPokedex] = useState([])
   const navigation = useNavigation() 
 
@@ -34,23 +35,33 @@ export default function AddPokeScreen() {
     />
   })
 
-  const addPokemon = () => {
+  const editPokemon = () => {
     if(name.length) {
-      const pokemonObj = { name, type1, type2, pokeNum, species, height, weight, description, imageUrl: imgUrl }
-      myPokedex?.myPokedex.push(pokemonObj)
-      updateDB('users', user.uid, myPokedex).then(() => {
-        navigation.navigate('MyPokedex')
-        window.alert('The pokemon was successfully added to your personal pokedex.')
-      })
+      
     }
     else {
       window.alert('Please fill in all required fields.')
     }
   }
+  const deletePokemon = () => {
+   
+  }
 
   useEffect(() => {
     getMyUser(user.uid, setMyPokedex) 
   },[user])
+
+  useEffect(() => {
+    setEditName(name)
+    setEditType1(type1)
+    setEditType2(type2)
+    setEditPokeNum(pokeNum)
+    setEditSpecies(species)
+    setEditHeight(height)
+    setEditWeight(weight)
+    setEditDescription(description)
+    setEditImgUrl(imageUrl)
+  },[props.route.params])
 
   return (
     <ScrollView>
@@ -62,25 +73,26 @@ export default function AddPokeScreen() {
           />
         </View>
         <View style={styles.header}>
-          <Text style={styles.pageTitle}>Add A Pokemon</Text>
-          <Text style={styles.pageSubtitle}>Add and manage pokemon to your personal collection.</Text>
+          <Text style={styles.pageTitle}>Edit Pokemon</Text>
+          <Text style={styles.pageSubtitle}>Edit or Delete your pokemon from your personal collection.</Text>
         </View>
         <View style={styles.formContainer}>
           <ImagePicker 
-            imgUrl={imgUrl} 
-            setImgUrl={setImgUrl} 
+            imgUrl={editImgUrl} 
+            setImgUrl={setEditImgUrl} 
           />
           <Input
             placeholder="Pokemon Name *"
             inputContainerStyle={styles.inputContainers}
             style={styles.inputs}
-            onChangeText={(val) => setName(val)}
+            onChangeText={(val) => setEditName(val)}
+            value={editName}
           />
           <View style={styles.pickerContainer}>
             <Picker
               selectedValue={type1}
               style={styles.inputPicker}
-              onValueChange={(itemValue, itemIndex) => setType1(itemValue)}
+              onValueChange={(itemValue, itemIndex) => setEditType1(itemValue)}
               itemStyle={styles.pickerItems}
             >
               {typesListItems}
@@ -90,7 +102,7 @@ export default function AddPokeScreen() {
             <Picker
               selectedValue={type2}
               style={styles.inputPicker}
-              onValueChange={(itemValue, itemIndex) => setType2(itemValue)}
+              onValueChange={(itemValue, itemIndex) => setEditType2(itemValue)}
             >
               {typesListItems}
             </Picker>
@@ -99,40 +111,53 @@ export default function AddPokeScreen() {
             placeholder="Pokemon Number"
             inputContainerStyle={styles.inputContainers}
             style={styles.inputs}
-            onChangeText={(val) => setPokeNum(val)}
+            onChangeText={(val) => setEditPokeNum(val)}
+            value={pokeNum}
           />
           <Input
             placeholder="Species"
             inputContainerStyle={styles.inputContainers}
             style={styles.inputs}
-            onChangeText={(val) => setSpecies(val)}
+            onChangeText={(val) => setEditSpecies(val)}
+            value={species}
           />
           <Input
             placeholder="Pokemon Height (cm)"
             inputContainerStyle={styles.inputContainers}
             style={styles.inputs}
-            onChangeText={(val) => setHeight(val)}
+            onChangeText={(val) => setEditHeight(val)}
+            value={height}
           />
           <Input
             placeholder="Pokemon Weight (kg)"
             inputContainerStyle={styles.inputContainers}
             style={styles.inputs}
-            onChangeText={(val) => setWeight(val)}
+            onChangeText={(val) => setEditWeight(val)}
+            value={weight}
           />
           <Input
             placeholder="Description"
             inputContainerStyle={styles.inputContainers}
             style={styles.inputs}
-            onChangeText={(val) => setDescription(val)}
+            onChangeText={(val) => setEditDescription(val)}
             numberOfLines={3}
             multiline
+            value={description}
           />
-          <Button 
-            title="Add Pokemon"
-            containerStyle={styles.btnContainer}
-            buttonStyle={styles.btnStyle}
-            onPress={() => addPokemon()}
-          />
+          <View style={styles.btnGroup}>
+            <Button 
+              title="Save"
+              containerStyle={[styles.btnContainer, {width: '45%'}]}
+              buttonStyle={styles.btnStyle}
+              onPress={() => editPokemon()}
+            />
+            <Button 
+              title="Delete"
+              containerStyle={[styles.btnContainer, {width: '45%'}]}
+              buttonStyle={[styles.btnStyle, {backgroundColor: 'red'}]}
+              onPress={() => deletePokemon()}
+            />
+          </View>
         </View>
       </View>
     </ScrollView>

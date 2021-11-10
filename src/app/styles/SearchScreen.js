@@ -45,5 +45,10 @@ export const styles = StyleSheet.create({
   subtitle: {
     color: '#999',
     fontWeight: '600'
+  },
+  smallText: {
+    color: '#aaa',
+    fontSize: 12,
+    paddingLeft: 20
   }
 })

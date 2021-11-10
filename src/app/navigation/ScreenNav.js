@@ -19,6 +19,8 @@ import logoutImg from '../assets/imgs/logoutImg.png'
 import AddPokeScreen from '../screens/AddPokeScreen'
 import MyPokedexScreen from '../screens/MyPokedexScreen'
 import RegisterScreen from '../auth/RegisterScreen'
+import MyPokeScreen from '../screens/MyPokeScreen'
+import EditPokeScreen from '../screens/EditPokeScreen'
 
 export default function ScreenNav(props) {
 
@@ -70,8 +72,10 @@ export default function ScreenNav(props) {
           <Stack.Screen name="Search" component={SearchScreen} />
           <Stack.Screen name="Favorites" component={FavoritesScreen} />
           <Stack.Screen name="AddPoke" component={AddPokeScreen} />
+          <Stack.Screen name="EditPoke" component={EditPokeScreen} />
           <Stack.Screen name="MyPokedex" component={MyPokedexScreen} />
           <Stack.Screen name="PokeScreen" component={PokeScreen} />
+          <Stack.Screen name="MyPokeScreen" component={MyPokeScreen} />
         </Stack.Navigator>
         <BottomNav navigRef={navigRef} />
       </NavigationContainer>

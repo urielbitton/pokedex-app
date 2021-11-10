@@ -9,10 +9,12 @@ import PageTitle from '../components/PageTitle';
 import SearchBar from 'react-native-elements/dist/searchbar/SearchBar-ios';
 import { useNavigation } from '@react-navigation/native'
 import Colors from '../utilities/Colors';
+import { menuLinks } from '../api/api';
+import { newsStories } from '../api/api'
 
 export default function HomeScreen() {
  
-  const {menuLinks, newsStories, setPageTitle, user} = useContext(StoreContext)
+  const {setPageTitle, user} = useContext(StoreContext)
   const [dayTime, setDayTime] = useState('')
   const navigation = useNavigation() 
   const time = new Date().getHours()

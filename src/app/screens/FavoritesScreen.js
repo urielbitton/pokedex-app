@@ -12,7 +12,7 @@ import { useNavigation } from '@react-navigation/native'
 
 export default function FavoritesScreen() {
 
-  const {setPageTitle, user, allPokemon, pokeLimit, setPokeLimit, allFavs, setAllFavs} = useContext(StoreContext)
+  const {setPageTitle, user, allPokemon, setPokeLimit, allFavs, setAllFavs} = useContext(StoreContext)
   const favPokemon = allPokemon.filter(x => allFavs?.favorites?.includes(x.name))
   const navigation = useNavigation() 
 

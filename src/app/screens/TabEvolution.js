@@ -58,7 +58,7 @@ export default function TabEvolution(props) {
           <Image source={pokeballImg} style={{position: 'absolute',top: -5,width:70,height:70,opacity:0.25}}/>
           <Text style={styles.evolveName}>{evolve?.chain?.evolves_to[0]?.species?.name}</Text>
         </View>
-      </View> : <></>}
+      </View> : <Text>No evolution for {pokemon.name}</Text>}
 
       { evolve?.chain?.evolves_to[0]?.evolves_to?.length ?
       <View style={styles.evolutionRow}>
